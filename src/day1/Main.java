@@ -1,33 +1,29 @@
 package day1;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Input number");
-        BigInteger inputNumber = scanner.nextBigInteger();
-        List<BigInteger[]> numbers = new ArrayList<>();
-        while (!(inputNumber.equals(BigInteger.ZERO))) {
-            numbers.add(inputNumber.divideAndRemainder(BigInteger.TEN));
-            inputNumber = inputNumber.divide(BigInteger.TEN);
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        char[] arrayOfChars = input.toCharArray();
+        int[] arrayOfInts = new int[arrayOfChars.length];
+        for (int i = 0; i < arrayOfChars.length; i++) {
+            arrayOfInts[i] = Integer.parseInt(String.valueOf(arrayOfChars[i]));
         }
-//        for (int i = numbers.size() - 1; i >= 0; i--) {
-//            numbers.add(numbers.get(i));
-//            numbers.remove(i);
-//        }
-//        int sum = 0;
-        BigInteger sum = BigInteger.ZERO;
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            if (numbers.get(i)[1].equals(numbers.get(i + 1)[1])) {
-                sum = sum.add(numbers.get(i)[1]);
+        int sum = 0;
+        for (int i = 0; i < arrayOfInts.length; i++) {
+            if ((arrayOfInts.length / 2) + i >= arrayOfInts.length) {
+                if (arrayOfInts[i] == arrayOfInts[i-arrayOfInts.length/2]) {
+                    sum += arrayOfInts[i];
+                }
+                continue;
             }
-        }
-        if (numbers.get(numbers.size() - 1)[1].equals(numbers.get(0)[1])) {
-            sum = sum.add(numbers.get(numbers.size() - 1)[1]);
+
+            if (arrayOfInts[i] == arrayOfInts[(arrayOfInts.length / 2) + i]) {
+                sum += arrayOfInts[i];
+            }
+
         }
         System.out.println(sum);
     }
